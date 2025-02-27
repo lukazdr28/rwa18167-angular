@@ -1,0 +1,12 @@
+img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+}
+
+.hranaImgDiv {
+    width: 25%;
+    height: 25%;
+    max-width: 25%;
+    max-height: 25%;
+}

@@ -1,0 +1,6 @@
+<div class="prikazrobe">
+    @for (hrana of this.hranaService.preuzmiHranu(); track $index) {
+        <app-hrana class="hranaItem" [hrana]="hrana"></app-hrana>
+    }
+        
+</div>

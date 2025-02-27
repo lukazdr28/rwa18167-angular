@@ -1,0 +1,6 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()"> <label for="username">Username </label> <input id="username" type="text"
+        formControlName="email"> <label for="password">Password</label> <input id="password" type="password"
+        formControlName="pass">
+        <button type="submit" [disabled]="!loginForm.valid">Submit</button>
+        </form>
+        <p>Form Value: {{ loginForm.value | json }}</p>
