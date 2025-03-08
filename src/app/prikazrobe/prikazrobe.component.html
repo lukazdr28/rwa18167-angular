@@ -1,5 +1,5 @@
 <div class="prikazrobe">
-    @for (hrana of  this.hrana; track $index) {
+    @for (hrana of  this.hrana$| async; track $index) {
         <app-hrana class="hranaItem" [hrana]="hrana"></app-hrana>
     }
         
