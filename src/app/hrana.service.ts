@@ -14,6 +14,12 @@ export class HranaService {
     return hrana;
 
   }
+
+  async izmeniHranu(hrana:Hrana)  {
+    this.authService.AutheticatedPost("/hrana/izmeni",hrana);
+  }
+
+
   constructor(private authService:AuthService) {
   
    }

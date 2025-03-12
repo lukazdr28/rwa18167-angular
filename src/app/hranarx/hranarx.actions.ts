@@ -4,6 +4,8 @@ import { Hrana } from "../hrana/hranaDTO";
 export const napraviHranu = createAction('[Hrana] Napravi Hranu',
 props<Hrana>())
 
+export const izmeniHranu = createAction('[Hrana] Izmeni Hranu',props<Hrana>())
+
 export const ukloniHranu = createAction('[Hrana] Ukloni Hranu',
 props<{uuid:string}>())
 

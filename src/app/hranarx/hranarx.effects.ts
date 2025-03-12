@@ -1,11 +1,12 @@
 import { Injectable, inject } from "@angular/core";
 import {Actions,createEffect,ofType} from "@ngrx/effects"
-import {napraviHranu,ucitajHranu,ucitajHranuErr,ucitajHranuOK,ukloniHranu,} from "./hranarx.actions"
+import {izmeniHranu, napraviHranu,ucitajHranu,ucitajHranuErr,ucitajHranuOK,ukloniHranu,} from "./hranarx.actions"
 import { HranaService } from "../hrana.service";
 import { Store } from "@ngrx/store";
 import { AppState } from "../app.state";
 import { of, from } from 'rxjs';
 import { switchMap, map, catchError, withLatestFrom } from 'rxjs/operators';
+import { selectAllHrana } from "./hrana.selector";
 
 @Injectable()
 export class HranaEffects {
@@ -24,4 +25,9 @@ switchMap(() => from(this.hranaService.preuzmiHranu()).pipe(
     ,catchError((error) => of(ucitajHranuErr({error})))
     
     ))))
-} 
+izmeniHranu$ = createEffect((actions$ = inject(Actions)) => 
+actions$.pipe(
+    ofType(izmeniHranu),
+    switchMap((hrana) => from(this.hranaService.izmeniHranu(hrana))
+    )),{dispatch:false})
+}

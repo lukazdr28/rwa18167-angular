@@ -2,7 +2,28 @@
 <div class="hranaImgDiv">
 <img src="http://localhost:3000/files/get/{{hrana.slika}}">
 </div>
-<p>{{hrana.naziv}}</p>
-<p>{{hrana.opis}}</p>
-<p>{{hrana.cenaRSD}} RSD</p>
+<p><editable (save)="update()" (cancel)="cancel()">
+    <ng-template viewMode>
+    {{hrana.naziv}}
+    </ng-template>
+    <ng-template editMode>
+        <input editableOnEnter editableOnEscape [formControl]="txt_naziv" />
+      </ng-template>
+</editable></p>
+<p><editable (save)="update()" (cancel)="cancel()">
+    <ng-template viewMode>
+    {{hrana.opis}}
+    </ng-template>
+    <ng-template editMode>
+        <input editableOnEnter editableOnEscape [formControl]="txt_opis" />
+      </ng-template>
+</editable></p>
+<p><editable (save)="update()" (cancel)="cancel()">
+    <ng-template viewMode>
+    {{hrana.cenaRSD}} RSD
+    </ng-template>
+    <ng-template editMode>
+        <input type="number" editableOnEnter editableOnEscape [formControl]="txt_cena" />
+      </ng-template>
+</editable></p>
 </div>
