@@ -1,6 +1,15 @@
 <div class="hranaItem">
+@if(hrana.uuid) {
+<button (click)="ukloniHranu()" class="delete_btn">X</button>
+} @else {
+  <button (click)="objaviHranu()" class="delete_btn">Objavi</button> 
+}
 <div class="hranaImgDiv">
+@if(hrana.slika == "") {
+  <img src="plus.svg">
+} @else {
 <img src="http://localhost:3000/files/get/{{hrana.slika}}">
+}
 </div>
 <p><editable (save)="update()" (cancel)="cancel()">
     <ng-template viewMode>
@@ -20,7 +29,11 @@
 </editable></p>
 <p><editable (save)="update()" (cancel)="cancel()">
     <ng-template viewMode>
+    @if(hrana.cenaRSD == -1) {
+      Cena
+    } @else {
     {{hrana.cenaRSD}} RSD
+    }
     </ng-template>
     <ng-template editMode>
         <input type="number" editableOnEnter editableOnEscape [formControl]="txt_cena" />

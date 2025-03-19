@@ -16,7 +16,15 @@ export class HranaService {
   }
 
   async izmeniHranu(hrana:Hrana)  {
+    if(!hrana.uuid) {return}
     this.authService.AutheticatedPost("/hrana/izmeni",hrana);
+  }
+  async ukloniHranu(dto:any)  {
+    this.authService.AutheticatedPost("/hrana/obrisi",dto);
+  }
+
+  async dodajHranu(hrana:Hrana)  {
+    this.authService.AutheticatedPost("/hrana/dodaj",hrana);
   }
 
 

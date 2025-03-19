@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
 import { Hrana } from "../hrana/hranaDTO";
-import { ucitajHranu, ucitajHranuOK } from "./hranarx.actions";
+import { izmeniHranu, napraviHranu, ucitajHranu, ucitajHranuOK, ukloniHranu } from "./hranarx.actions";
 
 export interface HranaState {
     hrana:Hrana[]
@@ -17,4 +17,14 @@ export const hranaReducer = createReducer(pocetno,
         ...state,
         hrana:hrana,
         error:''
-    })))
+    })),
+    on(izmeniHranu,(state,props) => {
+        let hranatmp = state.hrana.filter(h => h.uuid != props.uuid)
+        hranatmp.push(props)
+        return {...state,hrana:hranatmp,error:''}
+    }),
+    on(ukloniHranu,(state,props) => {
+        let hranatmp = state.hrana.filter(h => h.uuid != props.uuid)
+        return {...state,hrana:hranatmp,error:''}
+    })
+    )

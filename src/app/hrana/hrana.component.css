@@ -4,9 +4,21 @@ img {
     height: 100%;
 }
 
+button.delete_btn {
+    position:relative;
+    top:1%;
+    right: 1%;
+}
+
 .hranaImgDiv {
     width: 25%;
     height: 25%;
     max-width: 25%;
     max-height: 25%;
+}
+
+.hranaItem {
+    border: black dashed 2px;
+    margin: 5px;
+    align-content: center;
 }

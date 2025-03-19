@@ -30,4 +30,18 @@ actions$.pipe(
     ofType(izmeniHranu),
     switchMap((hrana) => from(this.hranaService.izmeniHranu(hrana))
     )),{dispatch:false})
+
+ukloniHranu$ = createEffect((actions$ = inject(Actions)) => 
+    actions$.pipe(
+        ofType(ukloniHranu),
+        switchMap((hrana) => from(this.hranaService.ukloniHranu(hrana))
+        )),{dispatch:false})
+
+napraviHranu$ = createEffect((actions$ = inject(Actions)) => 
+        actions$.pipe(
+            ofType(napraviHranu),
+            switchMap((hrana) => from(this.hranaService.dodajHranu(hrana))
+            )),{dispatch:false})
 }
+
+

@@ -3,7 +3,7 @@ import { Hrana } from './hranaDTO';
 import { EditableComponent, EditModeDirective, ViewModeDirective } from '@ngneat/edit-in-place'
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { izmeniHranu } from '../hranarx/hranarx.actions';
+import { izmeniHranu, napraviHranu, ukloniHranu } from '../hranarx/hranarx.actions';
 @Component({
   selector: 'app-hrana',
   standalone: true,
@@ -47,6 +47,18 @@ export class HranaComponent {
     this.txt_naziv.setValue(this.hrana.naziv);
     this.txt_opis.setValue(this.hrana.opis);
     this.txt_cena.setValue(this.hrana.cenaRSD);
+  }
+  ukloniHranu() {
+    if(this.hrana.uuid) {
+    this.store.dispatch(ukloniHranu({uuid:this.hrana.uuid}))
+    }
+  }
+  objaviHranu() {
+    if(this.hrana.uuid) {return}
+    if(this.hrana.cenaRSD == -1 || this.hrana.naziv.includes('\u180E') ||  this.hrana.opis.includes('\u180E')) {
+      alert("Niste popunili sva neophodna polja!")
+      return;}
+    this.store.dispatch(napraviHranu(this.hrana))
   }
 }
 
