@@ -6,9 +6,9 @@
 }
 <div class="hranaImgDiv">
 @if(hrana.slika == "") {
-  <img src="plus.svg">
+  <img (click)="objaviSliku()" src="plus.svg">
 } @else {
-<img src="http://localhost:3000/files/get/{{hrana.slika}}">
+<img (click)="objaviSliku()" src="http://localhost:3000/files/get/{{hrana.slika}}">
 }
 </div>
 <p><editable (save)="update()" (cancel)="cancel()">

@@ -3,7 +3,7 @@ import { Hrana } from './hranaDTO';
 import { EditableComponent, EditModeDirective, ViewModeDirective } from '@ngneat/edit-in-place'
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { izmeniHranu, napraviHranu, ukloniHranu } from '../hranarx/hranarx.actions';
+import { izmeniHranu, napraviHranu, objaviSliku, ukloniHranu } from '../hranarx/hranarx.actions';
 @Component({
   selector: 'app-hrana',
   standalone: true,
@@ -59,6 +59,23 @@ export class HranaComponent {
       alert("Niste popunili sva neophodna polja!")
       return;}
     this.store.dispatch(napraviHranu(this.hrana))
+  }
+
+
+  async objaviSliku() {
+    const fileupload = document.createElement("input")
+    fileupload.type = 'file'
+    const filepromise = new Promise(function(resolve,reject) {
+      fileupload.onchange = (e) => {
+        if(fileupload.files == null) {reject("Fajlovi su null"); return;}
+        resolve(fileupload.files[0])
+      }
+    })
+  fileupload.click()
+   const izabraniFajl:File = <File>await filepromise
+   console.log(izabraniFajl)
+   this.store.dispatch(objaviSliku({file:izabraniFajl,hrana:this.hrana}))
+
   }
 }
 

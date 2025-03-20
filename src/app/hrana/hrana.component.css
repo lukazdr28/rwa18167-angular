@@ -22,3 +22,7 @@ button.delete_btn {
     margin: 5px;
     align-content: center;
 }
+
+input.fileUpload {
+    display: none;
+}

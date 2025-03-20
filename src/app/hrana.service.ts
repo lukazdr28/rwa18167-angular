@@ -27,6 +27,10 @@ export class HranaService {
     this.authService.AutheticatedPost("/hrana/dodaj",hrana);
   }
 
+  async objaviSliku(slika:File) {
+    const resp = await this.authService.AutheticatedPostFile("/files/upload",slika)
+    return resp
+    }
 
   constructor(private authService:AuthService) {
   

@@ -35,5 +35,13 @@ export class AuthService {
     return await firstValueFrom(resobs);
 
   }
-  
+  async AutheticatedPostFile(endpoint:string,file:File) {
+    const token = sessionStorage.getItem("JWT_TOKEN");
+    if(token == null) {throw new Error("Los login");}
+    const data = new FormData()
+    data.append("file",file)
+    const resobs = this.httpClient.post(`${API_URL}${endpoint}`,data,{headers:{Authorization:`Bearer ${token}`}})
+    return await firstValueFrom(resobs);
+
+  }
 }

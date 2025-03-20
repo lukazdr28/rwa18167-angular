@@ -1,6 +1,6 @@
 import { Injectable, inject } from "@angular/core";
 import {Actions,createEffect,ofType} from "@ngrx/effects"
-import {izmeniHranu, napraviHranu,ucitajHranu,ucitajHranuErr,ucitajHranuOK,ukloniHranu,} from "./hranarx.actions"
+import {izmeniHranu, napraviHranu,objaviSliku,ucitajHranu,ucitajHranuErr,ucitajHranuOK,ukloniHranu,} from "./hranarx.actions"
 import { HranaService } from "../hrana.service";
 import { Store } from "@ngrx/store";
 import { AppState } from "../app.state";
@@ -42,6 +42,12 @@ napraviHranu$ = createEffect((actions$ = inject(Actions)) =>
             ofType(napraviHranu),
             switchMap((hrana) => from(this.hranaService.dodajHranu(hrana))
             )),{dispatch:false})
+
+objaviSliku$ = createEffect((actions$ = inject(Actions)) => 
+        actions$.pipe(
+            ofType(objaviSliku),
+            switchMap((slika) => from(this.hranaService.objaviSliku(slika.file)).pipe(map((ime:any) => {return izmeniHranu({...slika.hrana,slika:ime.filename})}))
+            )))
 }
 
 
