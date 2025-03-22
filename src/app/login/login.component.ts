@@ -23,6 +23,8 @@ export class LoginComponent {
       return
     }
     sessionStorage.setItem("JWT_TOKEN",res["token"]);
+    const prof = await this.authService.AutheticatedGet("/accounts/profile")
+    sessionStorage.setItem("LOGGED_IN_PROFILE",JSON.stringify(prof))
     this.router.navigate(["/kupi"])
 
   }

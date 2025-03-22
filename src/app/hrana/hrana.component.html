@@ -1,8 +1,10 @@
-<div class="hranaItem">
+<div [style]="border" (click)="oznaciHranu()" (contextmenu)="ponistiOdabir($event)" class="hranaItem">
+@if(edit) {
 @if(hrana.uuid) {
 <button (click)="ukloniHranu()" class="delete_btn">X</button>
 } @else {
   <button (click)="objaviHranu()" class="delete_btn">Objavi</button> 
+}
 }
 <div class="hranaImgDiv">
 @if(hrana.slika == "") {
@@ -11,6 +13,11 @@
 <img (click)="objaviSliku()" src="http://localhost:3000/files/get/{{hrana.slika}}">
 }
 </div>
+@if (!this.edit) {
+  <p>{{hrana.naziv}}</p>
+  <p>{{hrana.opis}}</p>
+  <p>{{hrana.cenaRSD}} RSD</p>
+} @else {
 <p><editable (save)="update()" (cancel)="cancel()">
     <ng-template viewMode>
     {{hrana.naziv}}
@@ -39,4 +46,5 @@
         <input type="number" editableOnEnter editableOnEscape [formControl]="txt_cena" />
       </ng-template>
 </editable></p>
+}
 </div>

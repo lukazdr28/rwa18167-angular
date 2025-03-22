@@ -1,7 +1,9 @@
 <div class="prikazrobe">
     @for (hrana of  this.hrana$| async; track $index) {
-        <app-hrana class="hranaItem" [hrana]="hrana"></app-hrana>
+        <app-hrana class="hranaItem" [edit]="editPrikaz" (javiOdabir)="odabir($event)" [hrana]="hrana"></app-hrana>
     }
-    <app-hrana class="hranaItem" [hrana]="{naziv:'Naziv\u180E',opis:'Opis\u180E',cenaRSD:-1,slika:''}"></app-hrana>
+    @if(editPrikaz) {
+    <app-hrana class="hranaItem" [edit]="true" [hrana]="{naziv:'Naziv\u180E',opis:'Opis\u180E',cenaRSD:-1,slika:''}"></app-hrana>
+    }
         
 </div>

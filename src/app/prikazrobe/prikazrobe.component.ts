@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { HranaService } from '../hrana.service';
 import { HranaComponent } from "../hrana/hrana.component";
 import { Hrana } from '../hrana/hranaDTO';
@@ -19,6 +19,11 @@ import { AppState } from '../app.state';
 })
 export class PrikazrobeComponent implements OnInit {
   hrana$
+  odabrani = new class {
+    [uuid:string]:{hrana:Hrana,kol:number}
+  }
+  editPrikaz : boolean|undefined = false
+  tip :string|undefined = undefined
   constructor(private store:Store<any>) {
    this.hrana$ = this.store.select(selectAllHrana)
    this.store = store
@@ -26,7 +31,27 @@ export class PrikazrobeComponent implements OnInit {
  
 
   async ngOnInit(): Promise<void> {
+    const json = sessionStorage.getItem("LOGGED_IN_PROFILE")
+    if(!json) {return}
+    this.tip = JSON.parse(json)["tip"]
+    this.editPrikaz = this.tip == "restoran"
     this.store.dispatch(ucitajHranu())
+  }
+  async odabir(e:{hrana:Hrana,kol:number}) {
+    if(this.editPrikaz) {return}
+    if(!e.hrana.uuid) {return}
+    let tmp = this.odabrani[e.hrana.uuid] ?? {hrana:e.hrana,kol:0}
+    tmp.kol += e.kol
+    if (tmp.kol < 1) {
+      const uuid = tmp.hrana.uuid!
+      if(uuid in  this.odabrani ) {
+        delete this.odabrani[uuid]
+      }
+      return
+    }
+    this.odabrani[e.hrana.uuid] = tmp
+    console.log(this.odabrani)
+
   }
   
 }

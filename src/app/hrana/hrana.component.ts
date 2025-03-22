@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Hrana } from './hranaDTO';
 import { EditableComponent, EditModeDirective, ViewModeDirective } from '@ngneat/edit-in-place'
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -14,7 +14,11 @@ import { izmeniHranu, napraviHranu, objaviSliku, ukloniHranu } from '../hranarx/
 
 
 export class HranaComponent {
+  color = "black"
+  border = `border: ${this.color} dashed 2px;`
   @Input() hrana! : Hrana
+@Input() edit : boolean|undefined
+@Output() javiOdabir = new EventEmitter<{hrana:Hrana,kol:number}>()
   constructor(private store:Store<any>)  {
     this.store = store
   }
@@ -63,6 +67,7 @@ export class HranaComponent {
 
 
   async objaviSliku() {
+    if(!this.edit) {return}
     const fileupload = document.createElement("input")
     fileupload.type = 'file'
     const filepromise = new Promise(function(resolve,reject) {
@@ -76,6 +81,23 @@ export class HranaComponent {
    console.log(izabraniFajl)
    this.store.dispatch(objaviSliku({file:izabraniFajl,hrana:this.hrana}))
 
+  }
+
+  async oznaciHranu() {
+    if(this.edit) {return}
+    this.javiOdabir.emit({hrana:this.hrana,kol:1})
+    this.color = "green"
+    this.border = `border: ${this.color} dashed 2px;`
+
+  }
+  async ponistiOdabir(e:Event) {
+    if(this.edit) {return}
+    e.preventDefault()
+    e.stopPropagation()
+    e.stopImmediatePropagation()
+    this.javiOdabir.emit({hrana:this.hrana,kol:-1})
+    this.color = "black"
+    this.border = `border: ${this.color} dashed 2px;`
   }
 }
 
