@@ -17,6 +17,20 @@ export class HranaComponent {
   color = "black"
   border = `border: ${this.color} dashed 2px;`
   @Input() hrana! : Hrana
+  @Input() set izabranaKolicina(value:number|undefined) {
+    this.izabranaKolicina_int = value ?? 0
+    if(this.izabranaKolicina_int <= 0) {
+      this.color = "black"
+      this.border = `border: ${this.color} dashed 2px;`
+    } else {
+      this.color = "green"
+      this.border = `border: ${this.color} dashed 2px;`
+    }
+  } get izabranaKolicina() : number|undefined {
+    return this.izabranaKolicina_int
+
+  }
+  private izabranaKolicina_int : number = 0
 @Input() edit : boolean|undefined
 @Output() javiOdabir = new EventEmitter<{hrana:Hrana,kol:number}>()
   constructor(private store:Store<any>)  {
@@ -86,8 +100,7 @@ export class HranaComponent {
   async oznaciHranu() {
     if(this.edit) {return}
     this.javiOdabir.emit({hrana:this.hrana,kol:1})
-    this.color = "green"
-    this.border = `border: ${this.color} dashed 2px;`
+
 
   }
   async ponistiOdabir(e:Event) {
@@ -96,9 +109,9 @@ export class HranaComponent {
     e.stopPropagation()
     e.stopImmediatePropagation()
     this.javiOdabir.emit({hrana:this.hrana,kol:-1})
-    this.color = "black"
-    this.border = `border: ${this.color} dashed 2px;`
+
   }
+  
 }
 
 

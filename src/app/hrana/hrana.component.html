@@ -17,6 +17,7 @@
   <p>{{hrana.naziv}}</p>
   <p>{{hrana.opis}}</p>
   <p>{{hrana.cenaRSD}} RSD</p>
+  <p>x{{izabranaKolicina}}</p>
 } @else {
 <p><editable (save)="update()" (cancel)="cancel()">
     <ng-template viewMode>

@@ -20,7 +20,7 @@ import { AppState } from '../app.state';
 export class PrikazrobeComponent implements OnInit {
   hrana$
   odabrani = new class {
-    [uuid:string]:{hrana:Hrana,kol:number}
+    [uuid:string]:{hrana:Hrana,kol:number}|undefined
   }
   editPrikaz : boolean|undefined = false
   tip :string|undefined = undefined
