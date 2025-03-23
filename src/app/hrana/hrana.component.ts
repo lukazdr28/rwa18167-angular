@@ -32,6 +32,7 @@ export class HranaComponent {
   }
   private izabranaKolicina_int : number = 0
 @Input() edit : boolean|undefined
+@Input() canAdd : boolean|undefined
 @Output() javiOdabir = new EventEmitter<{hrana:Hrana,kol:number}>()
   constructor(private store:Store<any>)  {
     this.store = store
@@ -98,13 +99,13 @@ export class HranaComponent {
   }
 
   async oznaciHranu() {
-    if(this.edit) {return}
+    if(this.edit || !this.canAdd) {return}
     this.javiOdabir.emit({hrana:this.hrana,kol:1})
 
 
   }
   async ponistiOdabir(e:Event) {
-    if(this.edit) {return}
+    if(this.edit || !this.canAdd) {return}
     e.preventDefault()
     e.stopPropagation()
     e.stopImmediatePropagation()

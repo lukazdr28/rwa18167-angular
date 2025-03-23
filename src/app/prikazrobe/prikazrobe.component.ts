@@ -9,6 +9,8 @@ import { selectAllHrana } from '../hranarx/hrana.selector';
 import { ucitajHranu } from '../hranarx/hranarx.actions';
 import { Observable } from 'rxjs';
 import { AppState } from '../app.state';
+import { Router } from '@angular/router';
+import { KorpaService } from '../korpa.service';
 
 @Component({
   selector: 'app-prikazrobe',
@@ -20,11 +22,12 @@ import { AppState } from '../app.state';
 export class PrikazrobeComponent implements OnInit {
   hrana$
   odabrani = new class {
-    [uuid:string]:{hrana:Hrana,kol:number}|undefined
+    [uuid:string]:{hrana:Hrana,kol:number}|undefined,
   }
+  odabrani_len = 0
   editPrikaz : boolean|undefined = false
   tip :string|undefined = undefined
-  constructor(private store:Store<any>) {
+  constructor(private store:Store<any>,public router:Router,private korpaService:KorpaService) {
    this.hrana$ = this.store.select(selectAllHrana)
    this.store = store
   }
@@ -47,11 +50,24 @@ export class PrikazrobeComponent implements OnInit {
       if(uuid in  this.odabrani ) {
         delete this.odabrani[uuid]
       }
+      this.odabrani_len = Object.keys(this.odabrani).length
       return
     }
     this.odabrani[e.hrana.uuid] = tmp
-    console.log(this.odabrani)
+    this.odabrani_len = Object.keys(this.odabrani).length
+    console.log(this.odabrani_len)
 
+  }
+  async dodajSve() {
+    const hrana_array:[{hrana:Hrana,kol:number}?] = []
+    for(const hrana in this.odabrani) {
+      hrana_array.push(this.odabrani[hrana])
+    }
+
+    console.log(this.korpaService.dodajUKorpu(hrana_array))
+    console.log(this.korpaService.vratiSvojuKorpu())
+    this.router.navigate(["/korpa"])
+    console.log(hrana_array)
   }
   
 }

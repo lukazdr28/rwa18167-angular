@@ -1,9 +1,12 @@
 <div class="prikazrobe">
     @for (hrana of  this.hrana$| async; track $index) {
-        <app-hrana class="hranaItem" [izabranaKolicina]="this.odabrani[hrana.uuid!]?.kol ?? 0" [edit]="editPrikaz" (javiOdabir)="odabir($event)" [hrana]="hrana"></app-hrana>
+        <app-hrana class="hranaItem" [canAdd]="this.router.url.includes('kupi')" [izabranaKolicina]="this.odabrani[hrana.uuid!]?.kol ?? 0" [edit]="editPrikaz" (javiOdabir)="odabir($event)" [hrana]="hrana"></app-hrana>
     }
     @if(editPrikaz) {
     <app-hrana class="hranaItem" [edit]="true" [hrana]="{naziv:'Naziv\u180E',opis:'Opis\u180E',cenaRSD:-1,slika:''}"></app-hrana>
+    }
+    @if(this.router.url.includes('kupi')) {
+        <button (click)="dodajSve()" [disabled]="this.odabrani_len == 0" class="prihvati">Nastavi ka korpi</button>
     }
         
 </div>
