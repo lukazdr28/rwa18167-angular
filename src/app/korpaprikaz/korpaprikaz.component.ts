@@ -5,6 +5,7 @@ import { Observable, from } from 'rxjs';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { Hrana } from '../hrana/hranaDTO';
 import { Router } from '@angular/router';
+import { NarudzbineService } from '../narudzbine.service';
 
 @Component({
   selector: 'app-korpaprikaz',
@@ -14,13 +15,21 @@ import { Router } from '@angular/router';
   styleUrl: './korpaprikaz.component.css'
 })
 export class KorpaprikazComponent {
+
   korpa$
-  constructor(private korpaService:KorpaService,private router:Router) {
-    this.korpa$ =  from(this.korpaService.vratiSvojuKorpu()) 
+  constructor(private korpaService:KorpaService,private narudzbineService:NarudzbineService,private router:Router) {
+    if(this.router.url.includes('korpa')) {
+    this.korpa$ =  from(this.korpaService.vratiSvojuKorpu())
+    } 
   }
 
   async isprazniKorpu() {
     this.korpaService.isprazniKorpu()
     this.router.navigate(['/kupi'])
   }
+
+  async potvrdiNarudzbinu() {
+     const uuid = this.narudzbineService.Naruci()
+     console.log(this.narudzbineService.vratiObjedinjeneNarudzbine())
+    }
 }
