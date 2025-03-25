@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
+import { Narudzbina } from './narudzbine/narudzbinedto';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,14 @@ export class NarudzbineService {
     return this.authService.AutheticatedPost("/narudzbina/naruci",null)
 
   }
-  async vratiObjedinjeneNarudzbine()  {
-    const sve = await this.authService.AutheticatedGet("/narudzbina/mojenarudzbine") 
-    return sve
+  async vratiObjedinjeneNarudzbine() : Promise<Narudzbina[]>  {
+    const sve = await this.authService.AutheticatedGet("/narudzbina/sve") 
+    return <Narudzbina[]>sve
+  }
+
+  async prihvatiNarudzbinu(uuid:string) {
+    const res = await this.authService.AutheticatedPost("/narudzbina/prihvati",uuid)
+    return res
   }
 
 }

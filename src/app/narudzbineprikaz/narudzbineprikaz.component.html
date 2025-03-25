@@ -1,0 +1,6 @@
+<div class="prikazrobe">
+    @for (n of  this.narudzbine$| async; track $index) {
+    <app-narudzbine [n]="n" [prihvatiDugme]="trebaDugme(n)"></app-narudzbine> 
+    }
+
+    </div>

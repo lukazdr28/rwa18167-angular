@@ -6,6 +6,7 @@
   <button (click)="objaviHranu()" class="delete_btn">Objavi</button> 
 }
 }
+@if(this.neCrtajSliku == undefined) { 
 <div class="hranaImgDiv">
 @if(hrana.slika == "") {
   <img (click)="objaviSliku()" src="plus.svg">
@@ -13,6 +14,7 @@
 <img (click)="objaviSliku()" src="http://localhost:3000/files/get/{{hrana.slika}}">
 }
 </div>
+}
 @if (!this.edit) {
   <p>Nudi:{{hrana.restoran?.ime}}</p>
   <p>{{hrana.naziv}}</p>

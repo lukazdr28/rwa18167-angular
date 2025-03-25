@@ -4,5 +4,5 @@ export interface Hrana {
     opis:string
     cenaRSD:number
     slika:string
-    restoran?:{ime:string}
+    restoran?:{ime:string,adresa:string}
 }
