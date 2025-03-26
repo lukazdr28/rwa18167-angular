@@ -7,8 +7,10 @@
         }</p>
         <p>Kreirano {{n.vremeKreiranja}}</p>
         <p>Prihvaceno {{n.vremePrihvatanja ?? "Nije jos"}}</p>
+        @if(n.kupac) {
         <p>Ispunjeno {{n.vremeIspunjenja ?? "Nije jos"}}</p>
-        <p>Cena: {{n.ukupnaCenaRSD}}</p>
+        }
+        <p>Cena: {{n.ukupnaCenaRSD}} RSD</p>
         <p>Identifikator {{n.uuid}}</p>
         <p>Status:{{n.status}}</p>
         @if(n.kupac) {

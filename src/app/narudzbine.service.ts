@@ -14,12 +14,23 @@ export class NarudzbineService {
 
   }
   async vratiObjedinjeneNarudzbine() : Promise<Narudzbina[]>  {
-    const sve = await this.authService.AutheticatedGet("/narudzbina/sve") 
-    return <Narudzbina[]>sve
+    const res = <Narudzbina[]>await this.authService.AutheticatedGet("/narudzbina/sve")
+    const sve = res.map(n => {
+      if("podaciODostavljacu" in n) {
+        if(Object.keys(n.podaciODostavljacu!).length > 0) {
+         
+        return {...n,dostavljac:<{ime:string,prezime:string}>n.podaciODostavljacu,podaciODostavljacu:undefined}
+        
+        }
+
+        return {...n,dostavljac:undefined,podaciODostavljacu:undefined}
+      } 
+      return n})
+    return sve
   }
 
   async prihvatiNarudzbinu(uuid:string) {
-    const res = await this.authService.AutheticatedPost("/narudzbina/prihvati",uuid)
+    const res = await this.authService.AutheticatedPost("/narudzbina/prihvati",{uuid:uuid})
     return res
   }
 

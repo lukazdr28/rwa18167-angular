@@ -24,6 +24,7 @@ export class NarudzbineprikazComponent {
       const tip = JSON.parse(json)["tip"]
       if(tip == "kupac" && n.status == "prihvacena") {return true}
       if(tip == "dostavljac" && n.status == "nova") {return true}
+      if(tip == "restoran" && n.status == "nova" && n.dostavljac) {return true}
       return false
 
     }
