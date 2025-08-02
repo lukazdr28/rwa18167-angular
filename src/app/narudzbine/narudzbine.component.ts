@@ -6,10 +6,12 @@ import { Narudzbina } from './narudzbinedto';
 import { HranaComponent } from "../hrana/hrana.component";
 import { AuthService } from '../auth.service';
 
+import { QRCodeComponent, QRCodeModule } from 'angularx-qrcode';
+
 @Component({
   selector: 'app-narudzbine',
   standalone: true,
-  imports: [HranaComponent],
+  imports: [HranaComponent,QRCodeModule],
   templateUrl: './narudzbine.component.html',
   styleUrl: './narudzbine.component.css'
 })

@@ -11,7 +11,8 @@
         <p>Ispunjeno {{n.vremeIspunjenja ?? "Nije jos"}}</p>
         }
         <p>Cena: {{n.ukupnaCenaRSD}} RSD</p>
-        <p>Identifikator {{n.uuid}}</p>
+        QR kod:
+        <qrcode [qrdata]="n.uuid" [width]="256"></qrcode>
         <p>Status:{{n.status}}</p>
         @if(n.kupac) {
         <p>Ime, prezime i adresa kupca: {{n.kupac.ime }} {{n.kupac.prezime}} {{n.kupac.adresa}}</p>

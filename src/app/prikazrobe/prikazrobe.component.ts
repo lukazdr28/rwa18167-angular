@@ -9,13 +9,13 @@ import { selectAllHrana } from '../hranarx/hrana.selector';
 import { ucitajHranu } from '../hranarx/hranarx.actions';
 import { Observable } from 'rxjs';
 import { AppState } from '../app.state';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { KorpaService } from '../korpa.service';
 
 @Component({
   selector: 'app-prikazrobe',
   standalone: true,
-  imports: [CommonModule, HranaComponent],
+  imports: [CommonModule, HranaComponent,RouterModule],
   templateUrl: './prikazrobe.component.html',
   styleUrl: './prikazrobe.component.css'
 })

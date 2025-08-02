@@ -5,8 +5,10 @@
     @if(editPrikaz) {
     <app-hrana class="hranaItem" [edit]="true" [hrana]="{naziv:'Naziv\u180E',opis:'Opis\u180E',cenaRSD:-1,slika:''}"></app-hrana>
     }
-    @if(this.router.url.includes('kupi')) {
+    @if(this.router.url.includes('kupi') && this.tip !== 'restoran' ) {
         <button (click)="dodajSve()" [disabled]="this.odabrani_len == 0" class="prihvati">Nastavi ka korpi</button>
     }
+    <button routerLink="/narudzbine"  class="prihvati">Narudzbine</button>
+    
         
 </div>
