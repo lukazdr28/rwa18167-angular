@@ -13,7 +13,8 @@ export class AuthService {
   constructor(private httpClient: HttpClient) { }
   async register(regDTO: any)  {
    const resobs = this.httpClient.post(`${API_URL}/accounts/register`,regDTO)
-   return await firstValueFrom(resobs)
+   const res = await firstValueFrom(resobs)
+   return res
   }
 
   async login(loginDTO: any) {

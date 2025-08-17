@@ -1,20 +1,21 @@
-<form [formGroup]="tip" (ngSubmit)="onSubmit()"> 
-    <input id="kupac" name="tip" type="radio" value="kupac" formControlName="tip"> <label for="kupac">Kupac </label> 
-    <input id="dostavljac" name="tip" type="radio" value="dostavljac" formControlName="tip"> <label for="dostavljac">Dostavljac </label>  
-    <input id="restoran" name="tip" type="radio" value="restoran" formControlName="tip"> <label for="restoran">Restoran </label> 
-    </form>
-    <p>Form Value: {{ tip.value | json }}</p>
+
 
 <form [formGroup]="selForm" (ngSubmit)="onSubmit()">
     <label for="email">email </label> 
-    <input id="email" type="text" formControlName="email"> 
+    <input matInput id="email" type="text" formControlName="email"> 
     <label for="password">Password</label> <input id="password" type="password" formControlName="pass">
     <label for="ime">Ime</label> 
-    <input id="ime" type="text" formControlName="ime">
+    <input matInput id="ime" type="text" formControlName="ime">
     <label *ngIf="selForm.controls.prezime" for="prezime">Prezime</label> 
     <input *ngIf="selForm.controls.prezime" id="prezime" type="text" formControlName="prezime">
     <label *ngIf="selForm.controls.adresa" for="adresa">Adresa</label> 
-    <input *ngIf="selForm.controls.adresa" id="adresa" type="text" formControlName="adresa">   
-    <button type="submit" [disabled]="!selForm.valid">Submit</button>
+    <input matInput *ngIf="selForm.controls.adresa" id="adresa" type="text" formControlName="adresa">   
+    <button type="submit" mat-button [disabled]="!selForm.valid">Registrujte se</button>
         </form>
-        <p>Form Value: {{ selForm.value | json }}</p>
+        <form [formGroup]="tip" (ngSubmit)="onSubmit()"> 
+    <input mat-button-toggle id="kupac" name="tip" type="radio" value="kupac" formControlName="tip"> <label for="kupac">Kupac </label> 
+    <input mat-button-toggle id="dostavljac" name="tip" type="radio" value="dostavljac" formControlName="tip"> <label for="dostavljac">Dostavljac </label>  
+    <input mat-button-toggle id="restoran" name="tip" type="radio" value="restoran" formControlName="tip"> <label for="restoran">Restoran </label> 
+    </form>
+    <button mat-button routerLink="/login">Imate nalog?</button>
+

@@ -6,4 +6,4 @@ import { KorpaprikazComponent } from './korpaprikaz/korpaprikaz.component';
 import { NarudzbineComponent } from './narudzbine/narudzbine.component';
 import { NarudzbineprikazComponent } from './narudzbineprikaz/narudzbineprikaz.component';
 
-export const routes: Routes = [{path:"login",component:LoginComponent},{path:"register",component:RegisterComponent},{path:"kupi",component:PrikazrobeComponent},{path:"korpa",component:KorpaprikazComponent},{path:"narudzbine",component:NarudzbineprikazComponent}];
+export const routes: Routes = [{path:"login",component:LoginComponent},{path:"register",component:RegisterComponent},{path:"kupi",component:PrikazrobeComponent},{path:"korpa",component:KorpaprikazComponent},{path:"narudzbine",component:NarudzbineprikazComponent},{path:"",component:LoginComponent,pathMatch:'full'}];

@@ -1,6 +1,7 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()"> <label for="username">Username </label> <input id="username" type="text"
-        formControlName="email"> <label for="password">Password</label> <input id="password" type="password"
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()"> <label for="username">Username/Email </label> <input matInput id="username" type="text"
+        formControlName="email"> <label for="password">Password</label> <input matInput id="password" type="password"
         formControlName="pass">
-        <button type="submit" [disabled]="!loginForm.valid">Submit</button>
+        <button mat-button type="submit" [disabled]="!loginForm.valid">Submit</button>
         </form>
+        <button mat-button routerLink="/register">Nemate nalog?</button>
         

@@ -4,10 +4,12 @@ import { EditableComponent, EditModeDirective, ViewModeDirective } from '@ngneat
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { izmeniHranu, napraviHranu, objaviSliku, ukloniHranu } from '../hranarx/hranarx.actions';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 @Component({
   selector: 'app-hrana',
   standalone: true,
-  imports: [EditableComponent,EditModeDirective,ViewModeDirective,ReactiveFormsModule],
+  imports: [EditableComponent,EditModeDirective,ViewModeDirective,ReactiveFormsModule,MatButtonModule,MatInputModule],
   templateUrl: './hrana.component.html',
   styleUrl: './hrana.component.css'
 })
@@ -41,19 +43,29 @@ export class HranaComponent {
   txt_naziv = new FormControl("",Validators.minLength(1))
   txt_opis = new FormControl("",Validators.minLength(1))
   txt_cena = new FormControl(0,Validators.min(0))
+  prosli = {cena:0,naziv:"",opis:""}
+  ngOnInit() {
 
+    this.txt_cena.setValue(this.hrana.cenaRSD);
+    this.txt_naziv.setValue(this.hrana.naziv);
+    this.txt_opis.setValue(this.hrana.opis);
+    this.prosli = {cena:this.hrana.cenaRSD,naziv:this.hrana.naziv,opis:this.hrana.opis}
+
+
+    
+  }
   update() {
     const tmp:Hrana = {...this.hrana}
     let trebaUpdate = false
-    if(this.txt_naziv.value) {
+    if(this.txt_naziv.value && this.txt_naziv.value != this.prosli.naziv) {
       tmp.naziv = this.txt_naziv.value;
       trebaUpdate = true
     }
-    if(this.txt_opis.value) {
+    if(this.txt_opis.value && this.txt_opis.value != this.prosli.opis) {
       tmp.opis = this.txt_opis.value;
       trebaUpdate = true
     }
-    if(this.txt_cena.value) {
+    if(this.txt_cena.value && this.txt_cena.value != this.prosli.cena) {
       tmp.cenaRSD = this.txt_cena.value;
       trebaUpdate = true
     }
@@ -105,11 +117,8 @@ export class HranaComponent {
 
 
   }
-  async ponistiOdabir(e:Event) {
+  async ponistiOdabir() {
     if(this.edit || !this.canAdd) {return}
-    e.preventDefault()
-    e.stopPropagation()
-    e.stopImmediatePropagation()
     this.javiOdabir.emit({hrana:this.hrana,kol:-1})
 
   }

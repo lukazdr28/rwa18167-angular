@@ -2,6 +2,6 @@
     @for (artikl of  this.korpa$| async; track $index) {
         <app-hrana class="hranaItem" [hrana]="artikl.hrana" [izabranaKolicina]="artikl.kol"></app-hrana>
     }
-    <button (click)="isprazniKorpu()">Isprazni korpu</button>
-    <button (click)="potvrdiNarudzbinu()">Naruci</button>
+    <button mat-raised-button (click)="isprazniKorpu()">Isprazni korpu</button>
+    <button mat-raised-button (click)="potvrdiNarudzbinu()">Naruci</button>
     </div>

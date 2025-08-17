@@ -1,0 +1,6 @@
+<div class="navbar">
+    <button mat-raised-button id="home_btn" routerLink="/">Pocetna</button>
+    @if(trebaOdjava) {
+    <button mat-raised-button id="signOut_btn" (click)="odjava()" >Odjava</button>
+    }
+</div>

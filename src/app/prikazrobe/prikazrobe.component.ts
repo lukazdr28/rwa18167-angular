@@ -11,11 +11,12 @@ import { Observable } from 'rxjs';
 import { AppState } from '../app.state';
 import { Router, RouterModule } from '@angular/router';
 import { KorpaService } from '../korpa.service';
+import { MatButton, MatButtonModule } from "@angular/material/button";
 
 @Component({
   selector: 'app-prikazrobe',
   standalone: true,
-  imports: [CommonModule, HranaComponent,RouterModule],
+  imports: [CommonModule, HranaComponent, RouterModule, MatButtonModule],
   templateUrl: './prikazrobe.component.html',
   styleUrl: './prikazrobe.component.css'
 })
@@ -37,6 +38,10 @@ export class PrikazrobeComponent implements OnInit {
     const json = sessionStorage.getItem("LOGGED_IN_PROFILE")
     if(!json) {return}
     this.tip = JSON.parse(json)["tip"]
+    if(this.tip == "dostavljac") {
+      this.router.navigate(["/narudzbine"])
+      return;
+    }
     this.editPrikaz = this.tip == "restoran"
     this.store.dispatch(ucitajHranu())
   }

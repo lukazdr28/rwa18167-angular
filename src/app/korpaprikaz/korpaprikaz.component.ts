@@ -6,11 +6,12 @@ import { AsyncPipe, CommonModule } from '@angular/common';
 import { Hrana } from '../hrana/hranaDTO';
 import { Router } from '@angular/router';
 import { NarudzbineService } from '../narudzbine.service';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-korpaprikaz',
   standalone: true,
-  imports: [HranaComponent,AsyncPipe],
+  imports: [HranaComponent,AsyncPipe,MatButtonModule],
   templateUrl: './korpaprikaz.component.html',
   styleUrl: './korpaprikaz.component.css'
 })
@@ -31,5 +32,6 @@ export class KorpaprikazComponent {
   async potvrdiNarudzbinu() {
      const uuid = this.narudzbineService.Naruci()
      console.log(this.narudzbineService.vratiObjedinjeneNarudzbine())
+      this.router.navigate(['/kupi'])
     }
 }
