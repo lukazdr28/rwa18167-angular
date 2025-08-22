@@ -28,6 +28,11 @@ export class KorpaprikazComponent {
     this.korpaService.isprazniKorpu()
     this.router.navigate(['/kupi'])
   }
+  ngOnInit() {
+        if(this.router.url.includes('korpa')) {
+    this.korpa$ =  from(this.korpaService.vratiSvojuKorpu())
+    } 
+  }
 
   async potvrdiNarudzbinu() {
      const uuid = this.narudzbineService.Naruci()

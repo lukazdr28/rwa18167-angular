@@ -16,6 +16,7 @@ import {MatInputModule} from '@angular/material/input';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  greska:string|null = null
   constructor(private authService:AuthService,private router:Router) {}
 
   loginForm = new FormGroup({    email: new FormControl('',[Validators.required,Validators.email]),    pass: new FormControl('',[Validators.required])});
@@ -26,11 +27,15 @@ export class LoginComponent {
     }
   }
   async onSubmit()  {
-    const res:any = await this.authService.login(this.loginForm.value)
-    console.table(res)
-    if(res["token"] == undefined) {
+    let res:any
+    try {
+      res = await this.authService.login(this.loginForm.value)
+    } catch (error) {
+      this.greska = "Neuspesan login, proverite unete podatke."
       return
     }
+    
+      
     sessionStorage.setItem("JWT_TOKEN",res["token"]);
     const prof = await this.authService.AutheticatedGet("/accounts/profile")
     sessionStorage.setItem("LOGGED_IN_PROFILE",JSON.stringify(prof))

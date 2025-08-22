@@ -18,10 +18,11 @@ import { Router, RouterModule } from '@angular/router';
 
 
 export class RegisterComponent implements OnInit{
+  greska:string|null = null
   constructor(private authService:AuthService,private router:Router) {}
   selForm: FormGroup<IRegForm> = new FormGroup<IRegForm>({
         "email":new FormControl("",Validators.email),
-        "pass":new FormControl("",Validators.required),
+        "pass":new FormControl("",[Validators.required,Validators.min(4),Validators.maxLength(20)]),
         "ime":new FormControl("",Validators.required)})
   ngOnInit(): void {
 
@@ -59,7 +60,8 @@ export class RegisterComponent implements OnInit{
     if(res.res == "OK") {
     this.router.navigate(["/login"])
     } else {
-      alert("Greska:" + res.res)
+      this.greska = res.res;
+      
     }
 
   }

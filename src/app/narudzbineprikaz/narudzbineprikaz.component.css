@@ -1,0 +1,14 @@
+div.success {
+    border: 1px solid darkgreen;
+    background-color: darkgreen;
+    color:white;
+    border-radius: 6px;
+
+}
+div.error {
+    border: 1px solid lightcoral;
+    background-color: lightcoral;
+    color:white;
+    border-radius: 6px;
+
+}

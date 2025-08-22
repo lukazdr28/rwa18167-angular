@@ -13,8 +13,10 @@ import { Narudzbina } from '../narudzbine/narudzbinedto';
   templateUrl: './narudzbineprikaz.component.html',
   styleUrl: './narudzbineprikaz.component.css'
 })
+
 export class NarudzbineprikazComponent {
   narudzbine$
+  rez:{narudzbina: Narudzbina,poruka:string,greska:boolean}|null = null
   constructor(private narudzbineService:NarudzbineService) {
     this.narudzbine$ =  from(this.narudzbineService.vratiObjedinjeneNarudzbine())
     }
@@ -26,6 +28,11 @@ export class NarudzbineprikazComponent {
       if(tip == "dostavljac" && n.status == "nova") {return true}
       if(tip == "restoran" && n.status == "nova" && n.dostavljac) {return true}
       return false
+
+    }
+    onPotvrdjeno(potvrda:{ narudzbina: Narudzbina; poruka: string; greska: boolean; }) {
+      this.narudzbine$ =  from(this.narudzbineService.vratiObjedinjeneNarudzbine())
+      this.rez = potvrda
 
     }
 }

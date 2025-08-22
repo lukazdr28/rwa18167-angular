@@ -1,13 +1,31 @@
 
-
-<form [formGroup]="selForm" (ngSubmit)="onSubmit()">
-    <label for="email">email </label> 
+<div class="accountForm">
+@if(this.greska && this.selForm.untouched) { 
+<div class="error">{{this.greska}}</div>
+}
+<form class="accountForm" [formGroup]="selForm" (ngSubmit)="onSubmit()">
+            @if(selForm.controls.email.errors && !selForm.controls.email.untouched) {
+                <div class="error">Morate da unesete e-mail!</div>
+        }
+    <label for="email">E-mail </label> 
     <input matInput id="email" type="text" formControlName="email"> 
+           @if(selForm.controls.pass.errors && !selForm.controls.pass.untouched ) {
+                <div class="error">Morate da unesete password izmedju 4 i 20 karaktera</div>
+        }
     <label for="password">Password</label> <input id="password" type="password" formControlName="pass">
+               @if(selForm.controls.ime.errors && !selForm.controls.ime.untouched) {
+                <div class="error">Ovo polje je neophodno</div>
+        }
     <label for="ime">Ime</label> 
     <input matInput id="ime" type="text" formControlName="ime">
+                 @if(selForm.controls.prezime?.errors && !selForm.controls.prezime?.untouched) {
+                <div class="error">Ovo polje je neophodno</div>
+        }
     <label *ngIf="selForm.controls.prezime" for="prezime">Prezime</label> 
     <input *ngIf="selForm.controls.prezime" id="prezime" type="text" formControlName="prezime">
+                 @if(selForm.controls.adresa?.errors && !selForm.controls.adresa?.untouched) {
+                <div class="error">Ovo polje je neophodno</div>
+        }
     <label *ngIf="selForm.controls.adresa" for="adresa">Adresa</label> 
     <input matInput *ngIf="selForm.controls.adresa" id="adresa" type="text" formControlName="adresa">   
     <button type="submit" mat-button [disabled]="!selForm.valid">Registrujte se</button>
@@ -19,3 +37,4 @@
     </form>
     <button mat-button routerLink="/login">Imate nalog?</button>
 
+</div>

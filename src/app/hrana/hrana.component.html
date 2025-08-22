@@ -18,14 +18,14 @@
 }
 @if (!this.edit) {
   <p>Nudi:{{hrana.restoran?.ime}}</p>
-  <p>{{hrana.naziv}}</p>
-  <p>{{hrana.opis}}</p>
-  <p>{{hrana.cenaRSD}} RSD</p>
-  <p>x{{izabranaKolicina}}</p>
+  <p>Naziv: {{hrana.naziv}}</p>
+  <p>Opis: {{hrana.opis}}</p>
+  <p>Cena po komadu: {{hrana.cenaRSD}} RSD</p>
+  <p>Zeljena kolicina: {{izabranaKolicina}}</p>
 } @else {
 <p><editable (save)="update()" (cancel)="cancel()">
     <ng-template viewMode>
-    {{hrana.naziv}}
+    Naziv: {{hrana.naziv}}
     </ng-template>
     <ng-template editMode>
         <input matInput editableOnEnter editableOnEscape [formControl]="txt_naziv" />
@@ -33,12 +33,13 @@
 </editable></p>
 <p><editable (save)="update()" (cancel)="cancel()">
     <ng-template viewMode>
-    {{hrana.opis}}
+    Opis: {{hrana.opis}}
     </ng-template>
     <ng-template editMode>
         <input matInput editableOnEnter editableOnEscape [formControl]="txt_opis" />
       </ng-template>
 </editable></p>
+Cena po kom. :
 <p><editable (save)="update()" (cancel)="cancel()">
     <ng-template viewMode>
     @if(hrana.cenaRSD == -1) {

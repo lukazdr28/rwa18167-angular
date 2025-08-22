@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { from } from 'rxjs';
 import { NarudzbineService } from '../narudzbine.service';
 import { AsyncPipe } from '@angular/common';
@@ -22,10 +22,20 @@ export class NarudzbineComponent {
   constructor(private narudzbinaService:NarudzbineService,private router:Router) {}
   @Input() n! : Narudzbina
   @Input() prihvatiDugme : boolean|undefined
+  @Output() prihvacena = new EventEmitter<{ narudzbina: Narudzbina; poruka: string; greska: boolean; }>
   
   async prihvati() {
-    const res = this.narudzbinaService.prihvatiNarudzbinu(this.n.uuid)
-    window.location.reload();
+    let greska = false
+    let poruka = ""
+    try {
+      const res = await this.narudzbinaService.prihvatiNarudzbinu(this.n.uuid)
+      poruka = "Potvrdjeno!"
+    } catch (error) {
+      greska = true
+      poruka = "Greska pri potvrdi"
+    }
+    
+    this.prihvacena?.emit({narudzbina:this.n,greska:greska,poruka:poruka})
   }
 }
 

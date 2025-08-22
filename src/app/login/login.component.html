@@ -1,7 +1,19 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()"> <label for="username">Username/Email </label> <input matInput id="username" type="text"
-        formControlName="email"> <label for="password">Password</label> <input matInput id="password" type="password"
-        formControlName="pass">
+<div class="accountForm">
+        @if(this.greska) { 
+<div class="error">{{this.greska}}</div>
+}
+<form class="accountForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        @if(loginForm.controls.email.errors && !loginForm.controls.email.untouched) {
+                <div class="error">Morate da unesete e-mail!</div>
+        } 
+        <label for="username">Username/Email </label> <input matInput id="username" type="text"
+        formControlName="email"> 
+        @if(loginForm.controls.pass.errors && !loginForm.controls.pass.untouched) {
+                <div class="error">Morate da unesete lozinku</div>
+        } 
+        <label for="password">Password</label> 
+        <input matInput id="password" type="password"formControlName="pass">
         <button mat-button type="submit" [disabled]="!loginForm.valid">Submit</button>
         </form>
         <button mat-button routerLink="/register">Nemate nalog?</button>
-        
+</div>
