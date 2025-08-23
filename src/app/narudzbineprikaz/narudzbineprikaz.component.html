@@ -1,9 +1,12 @@
 <div class="prikazrobe">
     @if(this.rez) {
+        
         <div class="{{this.rez.greska ? 'error' : 'success'}}">{{this.rez.poruka}}</div>
     }
+    <div class="racuni">
     @for (n of  this.narudzbine$| async; track $index) {
     <app-narudzbine (prihvacena)="onPotvrdjeno($event)" [n]="n" [prihvatiDugme]="trebaDugme(n)"></app-narudzbine> 
     }
+    </div>
 
     </div>

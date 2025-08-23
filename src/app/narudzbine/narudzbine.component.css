@@ -1,0 +1,18 @@
+.racun {
+    display: flex;
+    flex-direction: column;
+    border:solid 1px black;
+    box-shadow: 1px black;
+    background-color:rgba(211, 211, 211, 0.2);
+    margin: 15px;
+    padding-left:5px;
+    width: 250px;
+    overflow: auto;
+    height: 350px;
+
+
+}
+
+qrcode {
+    align-self:  center;
+}

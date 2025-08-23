@@ -1,8 +1,6 @@
 
 div.error {
-    border: 1px solid lightcoral;
-    background-color: lightcoral;
-    color:white;
+    color:red;
     border-radius: 6px;
 
 }

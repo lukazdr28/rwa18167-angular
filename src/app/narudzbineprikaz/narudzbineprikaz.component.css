@@ -12,3 +12,9 @@ div.error {
     border-radius: 6px;
 
 }
+
+.racuni {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}

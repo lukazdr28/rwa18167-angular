@@ -1,4 +1,4 @@
-
+<div class="racun">
         <p>Dostavlja:@if(!n.dostavljac) {
             Niko jos
         } @else {
@@ -11,8 +11,6 @@
         <p>Ispunjeno {{n.vremeIspunjenja ?? "Nije jos"}}</p>
         }
         <p>Cena: {{n.ukupnaCenaRSD}} RSD</p>
-        QR kod:
-        <qrcode [qrdata]="n.uuid" [width]="256"></qrcode>
         <p>Status:{{n.status}}</p>
         @if(n.kupac) {
         <p>Ime, prezime i adresa kupca: {{n.kupac.ime }} {{n.kupac.prezime}} {{n.kupac.adresa}}</p>
@@ -21,6 +19,8 @@
         @for(a of n.artikli;track $index) {
             <app-hrana [hrana]="a.hrana" [izabranaKolicina]="a.kol" [neCrtajSliku]="true"></app-hrana>    
         }
+                <qrcode [qrdata]="n.uuid" [width]="256"></qrcode>
         @if(this.prihvatiDugme) {
             <button mat-raised-button (click)="prihvati()">Potvrdi</button>
         }
+</div>
