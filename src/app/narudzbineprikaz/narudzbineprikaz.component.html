@@ -3,9 +3,12 @@
         
         <div class="{{this.rez.greska ? 'error' : 'success'}}">{{this.rez.poruka}}</div>
     }
+     <input type="checkbox" id="samoNove" (checked)="samonove" (change)="samonove = !samonove">
+    <label>Prikazi samo neispunjene?</label>
     <div class="racuni">
+   
     @for (n of  this.narudzbine$| async; track $index) {
-    <app-narudzbine (prihvacena)="onPotvrdjeno($event)" [n]="n" [prihvatiDugme]="trebaDugme(n)"></app-narudzbine> 
+    <app-narudzbine (prihvacena)="onPotvrdjeno($event)" [n]="n" [prihvatiDugme]="trebaDugme(n)" class="{{samonove && n.status == 'ispunjena' ? 'nebitna' : ''}}"></app-narudzbine> 
     }
     </div>
 

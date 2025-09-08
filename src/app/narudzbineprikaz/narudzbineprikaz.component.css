@@ -18,3 +18,7 @@ div.error {
     flex-direction: row;
     flex-wrap: wrap;
 }
+
+.nebitna {
+    display: none;
+}

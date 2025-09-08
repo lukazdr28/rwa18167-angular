@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NarudzbineService } from '../narudzbine.service';
-import { from } from 'rxjs';
+import { filter, from } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { NarudzbineComponent } from '../narudzbine/narudzbine.component';
 import { AuthService } from '../auth.service';
@@ -16,6 +16,7 @@ import { Narudzbina } from '../narudzbine/narudzbinedto';
 
 export class NarudzbineprikazComponent {
   narudzbine$
+  samonove = false
   rez:{narudzbina: Narudzbina,poruka:string,greska:boolean}|null = null
   constructor(private narudzbineService:NarudzbineService) {
     this.narudzbine$ =  from(this.narudzbineService.vratiObjedinjeneNarudzbine())
