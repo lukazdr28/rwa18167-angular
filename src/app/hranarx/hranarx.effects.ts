@@ -34,7 +34,7 @@ actions$.pipe(
 ukloniHranu$ = createEffect((actions$ = inject(Actions)) => 
     actions$.pipe(
         ofType(ukloniHranu),
-        switchMap((hrana) => from(this.hranaService.ukloniHranu(hrana))
+        switchMap((hrana) => from(this.hranaService.ukloniHranu({uuid:hrana.uuid}))
         )),{dispatch:false})
 
 napraviHranu$ = createEffect((actions$ = inject(Actions)) => 

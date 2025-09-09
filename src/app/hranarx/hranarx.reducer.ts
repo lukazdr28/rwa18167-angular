@@ -1,30 +1,27 @@
 import { createReducer, on } from "@ngrx/store";
 import { Hrana } from "../hrana/hranaDTO";
+import {createEntityAdapter, EntityAdapter, EntityState,Update} from "@ngrx/entity"
 import { izmeniHranu, napraviHranu, ucitajHranu, ucitajHranuOK, ukloniHranu } from "./hranarx.actions";
 
-export interface HranaState {
-    hrana:Hrana[]
+export interface HranaState extends EntityState<Hrana>  {
     error:string
 }
 
-export const pocetno:HranaState = {
-    hrana:[],
-    error:''
-}
 
-export const hranaReducer = createReducer(pocetno,
-    on(ucitajHranuOK, (state,{hrana}) => ({
-        ...state,
-        hrana:hrana,
-        error:''
-    })),
-    on(izmeniHranu,(state,props) => {
-        let hranatmp = state.hrana.filter(h => h.uuid != props.uuid)
-        hranatmp.push(props)
-        return {...state,hrana:hranatmp,error:''}
+export const HranaAdapter : EntityAdapter<Hrana> = createEntityAdapter<Hrana>()
+
+export const stanje:HranaState = HranaAdapter.getInitialState({error:''})
+
+
+export const hranaReducer = createReducer(stanje,
+    on(ucitajHranuOK, (novo,{hrana}) => (
+        HranaAdapter.addMany(hrana,stanje)
+    )),
+    on(izmeniHranu,(novo,props) => {
+        return HranaAdapter.upsertOne(props,stanje)
     }),
-    on(ukloniHranu,(state,props) => {
-        let hranatmp = state.hrana.filter(h => h.uuid != props.uuid)
-        return {...state,hrana:hranatmp,error:''}
-    })
+    on(ukloniHranu,(novo,props) => {
+        return HranaAdapter.removeOne(props.uuid,stanje)
+    }),
+ 
     )

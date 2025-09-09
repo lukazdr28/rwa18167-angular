@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { izmeniHranu, napraviHranu, objaviSliku, ukloniHranu } from '../hranarx/hranarx.actions';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { Update } from '@ngrx/entity';
 @Component({
   selector: 'app-hrana',
   standalone: true,
