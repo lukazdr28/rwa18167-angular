@@ -15,7 +15,7 @@ export const pocetno:HranaState = HranaAdapter.getInitialState({error:''})
 
 export const hranaReducer = createReducer(pocetno,
     on(ucitajHranuOK, (novo,{hrana}) => (
-        HranaAdapter.addMany(hrana,novo)
+        HranaAdapter.addMany(hrana,pocetno)
     )),
     on(izmeniHranu,(novo,props) => {
         return HranaAdapter.upsertOne(props,novo)
