@@ -22,6 +22,9 @@
   <p>Opis: {{hrana.opis}}</p>
   <p>Cena po komadu: {{hrana.cenaRSD}} RSD</p>
   <p>Zeljena kolicina: {{izabranaKolicina}}</p>
+  @if(this.zaDostavljaca) {
+    <p>Adresa: {{hrana.restoran!.adresa!}}</p>
+  }
 } @else {
 <p><editable (save)="update()" (cancel)="cancel()">
     <ng-template viewMode>

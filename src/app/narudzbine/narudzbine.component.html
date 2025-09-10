@@ -17,7 +17,7 @@
         }
 
         @for(a of n.artikli;track $index) {
-            <app-hrana [hrana]="a.hrana" [izabranaKolicina]="a.kol" [neCrtajSliku]="true"></app-hrana>    
+            <app-hrana [hrana]="a.hrana" [izabranaKolicina]="a.kol" [neCrtajSliku]="true" [zaDostavljaca]="dostavljac()"></app-hrana>    
         }
                 <qrcode [qrdata]="n.uuid" [width]="256"></qrcode>
         @if(this.prihvatiDugme) {

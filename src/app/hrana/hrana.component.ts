@@ -37,6 +37,7 @@ export class HranaComponent {
 @Input() edit : boolean|undefined
 @Input() neCrtajSliku:boolean|undefined
 @Input() canAdd : boolean|undefined
+@Input() zaDostavljaca :boolean|undefined
 @Output() javiOdabir = new EventEmitter<{hrana:Hrana,kol:number}>()
   constructor(private store:Store<any>)  {
     this.store = store

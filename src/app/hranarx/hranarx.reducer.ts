@@ -8,20 +8,20 @@ export interface HranaState extends EntityState<Hrana>  {
 }
 
 
-export const HranaAdapter : EntityAdapter<Hrana> = createEntityAdapter<Hrana>()
+export const HranaAdapter : EntityAdapter<Hrana> = createEntityAdapter<Hrana>({selectId: (e) => <string>e.uuid})
 
-export const stanje:HranaState = HranaAdapter.getInitialState({error:''})
+export const pocetno:HranaState = HranaAdapter.getInitialState({error:''})
 
 
-export const hranaReducer = createReducer(stanje,
+export const hranaReducer = createReducer(pocetno,
     on(ucitajHranuOK, (novo,{hrana}) => (
-        HranaAdapter.addMany(hrana,stanje)
+        HranaAdapter.addMany(hrana,novo)
     )),
     on(izmeniHranu,(novo,props) => {
-        return HranaAdapter.upsertOne(props,stanje)
+        return HranaAdapter.upsertOne(props,novo)
     }),
     on(ukloniHranu,(novo,props) => {
-        return HranaAdapter.removeOne(props.uuid,stanje)
+        return HranaAdapter.removeOne(props.uuid,novo)
     }),
  
     )

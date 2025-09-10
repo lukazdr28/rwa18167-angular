@@ -24,6 +24,14 @@ export class NarudzbineComponent {
   @Input() prihvatiDugme : boolean|undefined
   @Output() prihvacena = new EventEmitter<{ narudzbina: Narudzbina; poruka: string; greska: boolean; }>
   
+  dostavljac(): boolean {
+    const json = sessionStorage.getItem("LOGGED_IN_PROFILE")
+    if(!json) {return false}
+    const tip = JSON.parse(json)["tip"]
+    if(tip == "dostavljac") {return true}
+    return false
+  }
+
   async prihvati() {
     let greska = false
     let poruka = ""
